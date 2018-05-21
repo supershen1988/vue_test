@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>计算属性-computed</h1>
+			<div>原始字符串:{{message}}</div>
+			<div >
+				计算后反转字符串:{{changeMsg}}
+			</div>
+			<h1>监听方法-watch</h1>
+			<div >
+				千米： <input type="text"  value="0" v-model="qianmi"/> <br />
+				
+				米： <input type="text"  value="0" v-model="mi"/>
+			</div>
+		</div>
+		<script type="text/javascript">  
+			new Vue({
+				el:'#app',
+				data:{
+					message:'Runoob!',
+					qianmi:0,
+					mi:0
+				},
+				//适用于复杂的业务计算，computed基于计算缓存，而method没有，
+				//只要页面重新渲染method就会被调用，而computed是只有值改变了才调用，更适合于计算
+				computed:{
+					changeMsg:function(){ 
+						return this.message.split('').reverse().join('');
+					}
+				},
+				//可用于监听数值变化
+				watch:{
+					qianmi:function(val){
+						this.qianmi = val;
+						this.mi = val * 1000;
+					},
+					mi:function(val){
+						this.mi = val;
+						this.qianmi = val/1000;
+					}
+				}
+				//
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<style>
+			.class1 {
+				background: #444;
+				color: #eee;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app">
+			<h1>bind事例</h1>
+			<label>修改颜色</label>
+			<input type="checkbox" v-model="checkbox" />
+			<br><br>
+			<div v-bind:class="{'class1': checkbox}">
+				directiva v-bind:class
+			</div>
+			<h1>表达式</h1>
+			<div>
+				{{5+5}}
+				<br/> {{ok ? 'yes':'no'}}
+				<br/> {{message.split('').reverse().join('')}}
+			</div>
+			<h1>表达式v-if</h1>
+			<div v-if="seen">
+				现在看到我了
+			</div>
+			<h1>表达式v-bind:url</h1>
+			<div>
+				<a :href="url">github主页</a>
+			</div>
+			<h1>表达式v-bind:url</h1>
+			<div>
+				<a @click="goUrl">github主页</a>
+			</div>
+			<h1>条件语句v-if</h1>
+			<div>
+				<input type="checkbox" @click="changeOk" />
+				<template v-if="ok">
+					<h2>我觉得ok啦</h1>
+				</template>
+				<template v-else>
+					<h2>我觉得还不行</h1>
+				</template> 
+			</div> 
+			<h1>显示html v-show</h1> 
+			<div v-show="ok">
+				v-show 是控制的div的 显示隐藏，通过display:none;div实际存在，而v-if如果为false则html不存在
+			</div>
+			<h1>循环 v-for</h1>
+			<div >
+				 <ol>
+				    <li v-for="entity in cart">
+				      {{ entity.name }}
+				    </li>
+				  </ol>
+				  带编号：<br />
+				   <ol>
+				    <li v-for="(entity,index) in cart">
+				    	  {{ index+1 }}-{{ entity.name }}
+				    </li>
+				  </ol>
+				key值：<br />
+				   <ol>
+				    <li v-for="(value,key,index) in user">
+				    	  {{ index+1 }}-{{ key }}-{{ value }}
+				    </li>
+				  </ol>
+				
+			</div> 
+		</div>
+		<script type="text/javascript">
+			//v-html可以将html代码直接编译输出
+			var vue = new Vue({
+				el: '#app',
+				data: {
+					checkbox: false,
+					ok: true,
+					message: 'guoshen',
+					seen: true,
+					url: 'https://www.github.com/supershen1988',
+					cart:[{
+										"name": "iphone7",
+										"price": 10,
+										"count": 1
+									},
+									{
+										"name": "ipad2",
+										"price": 10,
+										"count": 1
+									}, {
+										"name": "huawei",
+										"price": 10,
+										"count": 1
+									}, {
+										"name": "macbook",
+										"price": 10,
+										"count": 2
+									}
+								],
+					user:{
+						name:'郭深',
+						age: '31'
+					}
+				},
+				
+				methods: {
+					goUrl: function() { 
+						alert('go to url');
+					},
+					changeOk : function(){
+						this.ok = !this.ok;
+					}
+				
+				}
+			});
+		</script>
+	</body>
+
+</html>
